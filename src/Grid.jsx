@@ -79,8 +79,68 @@ class Grid extends React.Component {
 
         if (this.state.direction === 'h')  {
             for (let i=0; i < ship.size; i++) {
-                if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1]].id[1] <= 10 - ship.size)) {
-                    count_h += 1 
+
+                if (grid1[cell_id[0]*10 + cell_id[1]].id[1] <= 10 - ship.size) {
+
+                    if ((cell_id[1] > 0) && (cell_id[1] < 10 - ship.size)) {
+
+                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
+                            
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 0) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 9) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        }
+
+                    else if (cell_id[1] === 0) {
+                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
+                            
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 0) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 9) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        }
+
+                    else if (cell_id[1] === 10 - ship.size) {
+
+                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
+                            
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 0) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        else if (cell_id[0] === 9) {
+                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
+                                count_h += 1 
+                                }
+                            }
+                        }
+
                     }
                 }
 
@@ -95,10 +155,69 @@ class Grid extends React.Component {
 
         if (this.state.direction === 'v')  {
             for (let i=0; i < ship.size; i++) {
-                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]])) {
-                    count_v += 1
+
+                if ((cell_id[0] > 0) && (cell_id[0] < 10 - ship.size)) {
+
+                    if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
+                        if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
+                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                count_v += 1
+                                }
+                            }
+                        else if ((cell_id[1] === 0)) {
+                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                count_v += 1
+                                }
+                            }
+                        else if (cell_id[1] === 9) {
+                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                count_v += 1
+                                }
+                            }
+                        }
                     }
-                }
+
+                    else if (cell_id[0] === 0) {
+                        if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
+                            if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
+                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                    count_v += 1
+                                    }
+                                }
+                            else if ((cell_id[1] === 0)) {
+                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                    count_v += 1
+                                    }
+                                }
+                            else if (cell_id[1] === 9) {
+                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
+                                    count_v += 1
+                                    }
+                                }
+                            }
+                        }
+                        else if (cell_id[0] === 10 - ship.size) {
+
+                            if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
+                                if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
+                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) ) {
+                                        count_v += 1
+                                        }
+                                    }
+                                else if ((cell_id[1] === 0)) {
+                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null)) {
+                                        count_v += 1
+                                        }
+                                    }
+                                else if (cell_id[1] === 9) {
+                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null)) {
+                                        count_v += 1
+                                        }
+                                    }
+                                }
+                            }
+                    
+            }
             if (count_v === ship.size) {
                 for (let i=0; i < ship.size; i++) {
                         grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur = ship.emo;
