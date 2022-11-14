@@ -3,14 +3,7 @@ import ReactDOM from "react-dom"
 import './index.css'
 import Grid from './Grid';
 import OpponentGrid from './OpponentGrid';
-
-
-const ships = [{"name": "Porte-avion", "size": 5, "emo": '✈️', 'hit': 0}, {"name": "Croiseur", "size": 4, "emo": '⚔️', 'hit': 0}, {"name": "Sous-Marin", "size": 3, "emo": '⚜️', 'hit': 0}, {"name": "Torpilleur", "size": 2, "emo": '🛡️', 'hit': 0}]
-const algo_ships = [{"name": "Porte-avion", "size": 5, "emo": '🛩️'}, {"name": "Croiseur", "size": 4, "emo": '⚔️'}, {"name": "Sous-Marin", "size": 3, "emo": '🏴'}, {"name": "Torpilleur", "size": 2, "emo": '🗡️'}]
-const your_emos = ['⚔️', '✈️', '🛡️', '⚜️']
-const algo_emos = ['🏴', '🗡️', '🛩️', '⚔️']
-const strike_emo = '💥'
-const sunk_emo = '☠️'
+import { algo_ships } from './Ships'
 
 
 class App extends React.Component {
@@ -160,11 +153,15 @@ class App extends React.Component {
     render() {
         return (  
             <>
-            <h2>Bataille navale</h2>
-                <div id='aside'>
+            <h2 className='title'>Bataille navale</h2>
+                <div id='grids'>
                 <React.StrictMode>
                     <div>
                         <Grid id={0} grid={this.state.grid} display={this.Display_opp_grid} />
+                    </div>
+                    <div id='center'>
+                        <img id="vs" src="vs.png" alt='versus picture'/>
+                        <div id='info'></div>
                     </div>
                     <div id="opp-grid">
                         <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} />

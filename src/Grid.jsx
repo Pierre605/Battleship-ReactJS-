@@ -1,8 +1,8 @@
 import React from 'react'
 import './Grid.css'
 import { useState, useEffect } from 'react';
+import {ships} from './Ships'
 
-const ships = [{"name": "Porte-avion", "size": 5, "emo": '✈️'}, {"name": "Croiseur", "size": 4, "emo": '⚔️'}, {"name": "Sous-Marin", "size": 3, "emo": '⚜️'}, {"name": "Torpilleur", "size": 2, "emo": '🛡️'}]
 
 class Grid extends React.Component {
     constructor(props) {
@@ -80,67 +80,21 @@ class Grid extends React.Component {
         if (this.state.direction === 'h')  {
             for (let i=0; i < ship.size; i++) {
 
-                if (grid1[cell_id[0]*10 + cell_id[1]].id[1] <= 10 - ship.size) {
-
-                    if ((cell_id[1] > 0) && (cell_id[1] < 10 - ship.size)) {
-
-                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
-                            
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 0) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 9) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
+                if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
+                    
+                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
+                        count_h += 1 
                         }
-
-                    else if (cell_id[1] === 0) {
-                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
-                            
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 0) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 9) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
+                    }
+                else if (cell_id[0] === 0) {
+                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
+                        count_h += 1 
                         }
-
-                    else if (cell_id[1] === 10 - ship.size) {
-
-                        if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
-                            
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] + ship.size].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 0) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
-                        else if (cell_id[0] === 9) {
-                            if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[cell_id[0]*10 + cell_id[1] - 1].valeur === null))  {
-                                count_h += 1 
-                                }
-                            }
+                    }
+                else if (cell_id[0] === 9) {
+                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) )  {
+                        count_h += 1 
                         }
-
                     }
                 }
 
@@ -156,68 +110,23 @@ class Grid extends React.Component {
         if (this.state.direction === 'v')  {
             for (let i=0; i < ship.size; i++) {
 
-                if ((cell_id[0] > 0) && (cell_id[0] < 10 - ship.size)) {
-
-                    if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
-                        if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
-                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                count_v += 1
-                                }
-                            }
-                        else if ((cell_id[1] === 0)) {
-                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                count_v += 1
-                                }
-                            }
-                        else if (cell_id[1] === 9) {
-                            if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                count_v += 1
-                                }
-                            }
+                if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
+                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null)) {
+                        count_v += 1
                         }
                     }
-
-                    else if (cell_id[0] === 0) {
-                        if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
-                            if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
-                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                    count_v += 1
-                                    }
-                                }
-                            else if ((cell_id[1] === 0)) {
-                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                    count_v += 1
-                                    }
-                                }
-                            else if (cell_id[1] === 9) {
-                                if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] + ship.size)*10 + cell_id[1]].valeur === null)) {
-                                    count_v += 1
-                                    }
-                                }
-                            }
+                else if ((cell_id[1] === 0)) {
+                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null)) {
+                        count_v += 1
                         }
-                        else if (cell_id[0] === 10 - ship.size) {
+                    }
+                else if (cell_id[1] === 9) {
+                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null)) {
+                        count_v += 1
+                        }
+                    }
+                }
 
-                            if (grid1[cell_id[0]*10 + ((ship.size-1)*10) + cell_id[1]]) {
-                                if ((cell_id[1] > 0) && (cell_id[1] < 9)) {
-                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null) ) {
-                                        count_v += 1
-                                        }
-                                    }
-                                else if ((cell_id[1] === 0)) {
-                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] + 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null)) {
-                                        count_v += 1
-                                        }
-                                    }
-                                else if (cell_id[1] === 9) {
-                                    if ((grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur === null) && (grid1[cell_id[0]*10 + (i*10) + cell_id[1] - 1].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1]].valeur === null)) {
-                                        count_v += 1
-                                        }
-                                    }
-                                }
-                            }
-                    
-            }
             if (count_v === ship.size) {
                 for (let i=0; i < ship.size; i++) {
                         grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur = ship.emo;
@@ -250,7 +159,7 @@ class Grid extends React.Component {
         for (let i = 0; i < cells.length; i++) {
             if (cells[i].textContent !== '' && cells[i].textContent !== '🌀') {
                 cells[i].style.border = 'none';
-                cells[i].style.backgroundColor = 'lightgray'
+                cells[i].style.backgroundColor = 'rgb(78, 74, 74)'
             }
             else {
                 cells[i].style.border = '1px solid black'
@@ -259,14 +168,15 @@ class Grid extends React.Component {
         }
     }
 
+
     Display_opp_grid()  {
         
         console.log("pressed")
         let opp_grid = document.getElementById("opp-grid")
         opp_grid.style.display = 'block'
 
-        let aside = document.getElementById('aside')
-        aside.classList.add('flex')
+        let vs_img = document.getElementById("vs")
+        vs_img.style.display = 'block'
 
         let div_settings = document.getElementById('grid-setting')
         div_settings.style.display = 'none'
@@ -282,7 +192,7 @@ class Grid extends React.Component {
         <>
         <div id='main'>
             <div id="grid-setting">
-                <div>
+                <div className='ships'>
                     {ships.map((ship) => {
                         return (
                         <div className='aside'>
@@ -293,14 +203,14 @@ class Grid extends React.Component {
                         </div>
                     )})}
                 </div>
-                <div onClick={this.SelectDir}>
-                    <div>
-                        <input type="radio" id="1" name="direction" value="h" />
-                        <label for="h">Horizontalement</label>
+                <div className='dir-aside' onClick={this.SelectDir}>
+                    <div className='aside'>
+                        <div>Horizontalement</div>
+                        <input type="radio" id="1" name="direction" value="h" size={'10px'}/>
                     </div>
-                    <div>
+                    <div className='aside'>
+                        <div >Verticalement</div>
                         <input type="radio" id="2" name="direction" value="v"/>
-                        <label for="v">Verticalement</label>
                     </div>
                 </div>
                 <div id='play' onClick={() => this.Display_opp_grid()}>
