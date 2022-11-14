@@ -16,6 +16,16 @@ body {
   background: linear-gradient(180deg, rgba(212,51,210,1) 0%, rgba(212,117,51,1) 19%, rgba(64,145,199,1) 47%, rgba(18,11,96,1) 100%);
 }
 
+#ships-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+#subs-group {
+  display: flex;
+  justify-content: space-around;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -53,7 +63,7 @@ margin-left: -11em;
 margin-top: 2em;
 }
 
-#info {
+.info {
   width: 12em;
   display: flex;
   justify-content: center;

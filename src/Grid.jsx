@@ -1,6 +1,5 @@
 import React from 'react'
 import './Grid.css'
-import { useState, useEffect } from 'react';
 import {ships} from './Ships'
 
 
@@ -14,19 +13,11 @@ class Grid extends React.Component {
                 }
         }
     
-    
 
     componentDidMount() {
         this.setState({ grid: this.props.grid });
     }
 
-
-
-    display_props = (cell_id) => {
-        console.log(cell_id)
-        let ship = this.props.selected
-        console.log(ship.size)
-    }
 
     SelectShips = () => {
         let ship = document.getElementsByName('ship')
@@ -146,11 +137,11 @@ class Grid extends React.Component {
                 count_full += 1
                 }
             }
-        if (count_full == 14) {
+        if (count_full === 14) {
             play.style.display = 'block'
         }
         else {
-            play.style.display = 'block'
+            play.style.display = 'none'
         }
     }
 

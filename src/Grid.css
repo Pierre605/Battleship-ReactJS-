@@ -1,6 +1,7 @@
 #main {
     display: flex;
     justify-content: left;
+    margin-left: 8em;
     }
 
 #play {
