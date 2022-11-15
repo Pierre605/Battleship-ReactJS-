@@ -142,7 +142,7 @@ class Grid extends React.Component {
             play.style.display = 'block'
         }
         else {
-            play.style.display = 'none'
+            play.style.display = 'block'
         }
     }
 

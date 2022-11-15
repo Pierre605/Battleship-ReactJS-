@@ -60,7 +60,7 @@ class OpponentGrid extends React.Component {
         }
         else {
             for (const ship of algo_ships) {
-                if (grid[index].valeur === ship.emo) {
+                if ((grid[index].valeur === ship.emo) && (grid[index].display !== '☠️') && (grid[index].display !== '💥')) {
                     grid[index].display = '💥'
                     ship.hit += 1
                     console.log(`${ship.hit} hit`)
@@ -269,7 +269,7 @@ class OpponentGrid extends React.Component {
                         }
                     }
                     else if ((grid[i - 1].display !== '🌀') && (grid[i - 1].display !== '☠️')) {
-                        if (grid[i - 1].valeur === ship.emo) {
+                        if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
                             ship.hit += 1
                             console.log(`${ship.hit} hit`)
                             console.log(`Votre ${ship.name} est touché`)
@@ -292,7 +292,7 @@ class OpponentGrid extends React.Component {
 
                 else if (grid[i].id[1] === 0) {
                     if ((grid[i + 1].display !== '🌀') && (grid[i + 1].display !== '☠️')) {
-                        if (grid[i + 1].valeur === ship.emo) {
+                        if ((grid[i + 1].valeur === ship.emo) && (grid[i + 1].display !== '☠️')) {
                             ship.hit += 1
                             console.log(`${ship.hit} hit`)
                             console.log(`Votre ${ship.name} est touché`)
@@ -470,7 +470,7 @@ class OpponentGrid extends React.Component {
                         console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
-                        if (grid[i + 10].valeur === ship.emo) {
+                        if ((grid[i + 10].valeur === ship.emo) && (grid[i + 10].display !== '☠️')) {
                             console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 10].display = '💥'
@@ -503,7 +503,7 @@ class OpponentGrid extends React.Component {
                             i = coord_hit[coord_hit.length - 1]
                             console.log("hit_ref:", i)
     
-                            if (grid[i - 10].valeur === ship.emo) {
+                            if ((grid[i - 10].valeur === ship.emo) && (grid[i - 10].display !== '☠️')) {
                                 console.log("here:", ship.emo)
                                 text = `Votre ${ship.name} est touché 🤕`
                                 grid[i - 10].display = '💥'
@@ -620,7 +620,7 @@ class OpponentGrid extends React.Component {
                         console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
-                        if (grid[i - 1].valeur === ship.emo) {
+                        if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
                             console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
@@ -654,7 +654,7 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
                         console.log("hit ref:", i)
 
-                        if (grid[i + 1].valeur === ship.emo) {
+                        if ((grid[i + 1].valeur === ship.emo) && (grid[i + 1].display !== '☠️')) {
                             console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
@@ -687,7 +687,7 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
                         console.log("hit ref:", i)
 
-                        if (grid[i - 1].valeur === ship.emo) {
+                        if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
                             console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
@@ -730,7 +730,7 @@ class OpponentGrid extends React.Component {
             console.log(`${ship.name} ennemi coulé`)
             let sunk_text = `${ship.name} ennemi coulé 💯`
             for (let i=0; i < grid.length; i++) {
-                if (grid[i].valeur === ship.emo) {
+                if ((grid[i].valeur === ship.emo) && (grid[i].display !== '☠️')) {
                     grid[i].display = '☠️'
                 }
             }
@@ -743,7 +743,7 @@ class OpponentGrid extends React.Component {
             console.log(`Votre ${ship.name} est coulé`)
             let sunk_text = `Votre ${ship.name} est coulé 😵`
             for (let i=0; i < grid.length; i++) {
-                if (grid[i].valeur === ship.emo) {
+                if ((grid[i].valeur === ship.emo) && (grid[i].display !== '☠️')) {
                     grid[i].display = '☠️'
                 }
             }
@@ -765,8 +765,8 @@ class OpponentGrid extends React.Component {
         }
         if (count === 14) {
             setTimeout(() => {
-                alert("Victoire ! Vous avez coulé tous les navires ennemis 🥳");
-                window.location.reload()
+                let id = 1
+                this.EndGameModal(id)
             }, 150)
             
         }
@@ -781,11 +781,56 @@ class OpponentGrid extends React.Component {
         }
         if (count === 14) {
             setTimeout(() => {
-                alert("Défaite. Tous vos navires ont été coulé 🥴");
+                let id = 0
+                this.EndGameModal(id)
+            }, 150)
+        }
+    } 
+
+
+    EndGameModal(grid_id) {
+
+        if (grid_id === 0) {
+            
+            let modal = document.getElementById("Modal-defeat");
+            modal.style.display = "block";
+
+            let span = document.getElementsByClassName("close")[0];
+            
+            span.onclick = function() {
+            modal.style.display = "none";
+            window.location.reload()
+            }
+
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
                 window.location.reload()
-            }, 150) 
+                }
+            }
+        }
+
+        else if (grid_id === 1) {
+            
+            let modal = document.getElementById("Modal-victory");
+            modal.style.display = "block";
+
+            let span = document.getElementsByClassName("close")[0];
+
+            span.onclick = function() {
+            modal.style.display = "none";
+            window.location.reload()
+            }
+
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                window.location.reload()
+                }
+            }
         }
     }
+
 
 
     render() {

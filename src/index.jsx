@@ -73,7 +73,6 @@ class App extends React.Component {
                     licht_r.push(r[i]);
                     }
                 }
-            // console.log("R:", licht_r)
 
             for (let i=0; i < licht_r.length; i++) {
                 licht_tab_index.push(licht_r[i].id[0]*10 + licht_r[i].id[1])
@@ -125,15 +124,12 @@ class App extends React.Component {
                         tab_index = licht_tab_index[j]
                         break
                 };
-            // console.log("count:", count)
+
             count = 0;
             if (tab_index) {
                 break
             }
             }
-
-            // console.log("ship size:", ship.size)
-            // console.log("tab_index:", tab_index)
 
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + (i*10)].valeur = ship.emo
@@ -168,6 +164,22 @@ class App extends React.Component {
                     </div>
                     <div id='center'>
                         <img id="vs" src="vs.png" alt='versus picture'/>
+
+                        <div id="Modal-victory" class="modal">
+                            <div class="modal-content">
+                                <span class="close"></span>
+                                <p>Victoire ! Vous avez coulé tous les navires ennemis 🥳</p>
+                                <img alt="victory picture" width="20%" src='victory_pic.png' />
+                            </div>
+                        </div>
+                        <div id="Modal-defeat" class="modal">
+                            <div class="modal-content">
+                                <span class="close"></span>
+                                <p>Défaite. Tous vos navires ont été coulé 🥴</p>
+                                <img alt="defeat picture" width="38%" src='defeat_pic.png' />
+                            </div>
+                        </div>
+
                         <div className='info' id='info-your-grid'></div>
                         <div className='info' id='info-algo-grid'></div>
                     </div>
