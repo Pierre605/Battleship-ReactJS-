@@ -1,6 +1,7 @@
 import React from 'react'
 import './Grid.css'
 import {ships} from './Ships'
+import './PlayButton.css'
 
 
 class Grid extends React.Component {
@@ -204,8 +205,14 @@ class Grid extends React.Component {
                         <input type="radio" id="2" name="direction" value="v"/>
                     </div>
                 </div>
-                <div id='play' onClick={() => this.Display_opp_grid()}>
-                    <input type="button" value='Jouer'/>
+                <div className='content__item'>
+                    <button id='play' onClick={() => this.Display_opp_grid()} class="button button--fenrir">
+                            <svg aria-hidden="true" class="progress" width="70" height="70" viewBox="0 0 70 70">
+                                <path class="progress__circle" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z"></path>
+                                <path class="progress__path" d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" pathLength="1"></path>
+                            </svg>
+                            <span>Jouer</span>
+                    </button>
                 </div>
             </div>
         
@@ -224,4 +231,3 @@ class Grid extends React.Component {
 
 
 export default Grid
- 

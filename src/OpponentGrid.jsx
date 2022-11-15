@@ -765,7 +765,7 @@ class OpponentGrid extends React.Component {
         }
         if (count === 14) {
             setTimeout(() => {
-                alert("Victoire ! 🥳");
+                alert("Victoire ! Vous avez coulé tous les navires ennemis 🥳");
                 window.location.reload()
             }, 150)
             
@@ -781,7 +781,7 @@ class OpponentGrid extends React.Component {
         }
         if (count === 14) {
             setTimeout(() => {
-                alert("Défaite. Tous vos navire ont été coulé 🥴");
+                alert("Défaite. Tous vos navires ont été coulé 🥴");
                 window.location.reload()
             }, 150) 
         }
