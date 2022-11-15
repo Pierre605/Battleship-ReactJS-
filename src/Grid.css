@@ -43,8 +43,8 @@ input[type=radio] {
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(10, 18px);
-    grid-template-rows: repeat(10, 18px);
+    grid-template-columns: repeat(10, 17.4px);
+    grid-template-rows: repeat(10, 17.4px);
     justify-content: center;
 }
 
