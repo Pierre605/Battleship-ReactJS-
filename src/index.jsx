@@ -5,6 +5,7 @@ import Grid from './Grid';
 import OpponentGrid from './OpponentGrid';
 import { algo_ships } from './Ships'
 
+let app_gh_pages_URL = "https://pierre605.github.io/Battleship-ReactJS-/";
 
 class App extends React.Component {
     constructor(props) {
@@ -163,38 +164,41 @@ class App extends React.Component {
                         <Grid id={0} grid={this.state.grid} display={this.Display_opp_grid} />
                     </div>
                     <div id='center'>
-                        <img id="vs" src="vs.png" alt='versus picture'/>
+                        <img id="vs" src={app_gh_pages_URL + "vs.png"} alt='versus'/>
 
                         <div id="Modal-victory" class="modal">
                             <div class="modal-content">
                                 <span class="close"></span>
                                 <p>Victoire ! Vous avez coulé tous les navires ennemis 🥳</p>
-                                <img alt="victory picture" width="20%" src='victory_pic.png' />
+                                <img id="vic-pic" alt="victory" src={app_gh_pages_URL + 'victory_pic.png'} />
                             </div>
                         </div>
                         <div id="Modal-defeat" class="modal">
                             <div class="modal-content">
                                 <span class="close"></span>
                                 <p>Défaite. Tous vos navires ont été coulé 🥴</p>
-                                <img alt="defeat picture" width="38%" src='defeat_pic.png' />
+                                <img id="loose-pic" alt="defeat" src={app_gh_pages_URL + 'defeat_pic.png'} />
                             </div>
                         </div>
-
-                        <div className='info' id='info-your-grid'></div>
-                        <div className='info' id='info-algo-grid'></div>
+                        <div id="info">
+                            <div id='info-your-grid'></div>
+                            <div id='info-algo-grid'></div>
+                        </div>
                     </div>
                     <div id="opp-grid">
                         <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.MakeOpponentGrid} />
                     </div>
                 </React.StrictMode>
                 </div>
-                <div id="ships-group">
-                    <img alt="ship pic" width="14%" src='bs_ship_pic.png'/>
-                    <img alt="ship pic" width="14%" src='bs_ship_pic_reverse.png'/>
-                </div>
-                <div id="subs-group">
-                    <img alt="submarine pic" width="14%" src='bs_sub_pic_signed.png'/>
-                    <img alt="submarine pic" width="14%" src='bs_sub_pic_reverse.png'/>
+                <div id="ships-pics">
+                    <div id="ships-group">
+                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic.png'}/>
+                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic_reverse.png'}/>
+                    </div>
+                    <div id="subs-group">
+                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_signed.png'}/>
+                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_reverse.png'}/>
+                    </div>
                 </div>
             </>
         )

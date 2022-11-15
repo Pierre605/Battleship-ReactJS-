@@ -803,7 +803,7 @@ class OpponentGrid extends React.Component {
             }
 
             window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
                 modal.style.display = "none";
                 window.location.reload()
                 }
@@ -823,7 +823,7 @@ class OpponentGrid extends React.Component {
             }
 
             window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
                 modal.style.display = "none";
                 window.location.reload()
                 }
