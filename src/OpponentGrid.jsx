@@ -87,6 +87,7 @@ class OpponentGrid extends React.Component {
 
     Algo_player = () => {
         let grid = this.props.your_grid
+        let algo_grid = this.props.grid
         let n = 0
         let r = []
         let r_idx = []
@@ -336,7 +337,7 @@ class OpponentGrid extends React.Component {
                     }
                 }
             
-            this.Check_defeat_you(grid)
+            this.Check_defeat_you(grid, algo_grid)
         }
         console.log("coord_hit:", coord_hit)
 
@@ -715,10 +716,11 @@ class OpponentGrid extends React.Component {
                 }
             } 
         this.DisplayAlgoShootReport(text)
-        this.Check_defeat_you(grid)
+        this.Check_defeat_you(grid, algo_grid)
 
         this.setState({
             your_grid: grid,
+            opponent_grid: algo_grid,
             coord_hit: coord_hit,
         })
 
@@ -772,7 +774,7 @@ class OpponentGrid extends React.Component {
         }
     }
 
-    Check_defeat_you = (grid) => {
+    Check_defeat_you = (grid, algo_grid) => {
         let count = 0
         for (let i=0; i < grid.length; i++) {
             if (grid[i].display === '☠️') {
@@ -780,6 +782,13 @@ class OpponentGrid extends React.Component {
             }
         }
         if (count === 14) {
+            for (let i=0; i < algo_grid.length; i++) {
+                for (const ship of algo_ships) {
+                if ((algo_grid[i].valeur === ship.emo) && ((algo_grid[i].display === null) || (algo_grid[i].display === '💥'))) {
+                    algo_grid[i].display = ship.emo
+                }
+            }
+        }
             setTimeout(() => {
                 let id = 0
                 this.EndGameModal(id)
