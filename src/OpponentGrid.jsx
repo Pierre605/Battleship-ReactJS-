@@ -10,13 +10,21 @@ class OpponentGrid extends React.Component {
         this.state = {
             opponent_grid: this.props.grid,
             your_grid: this.props.your_grid,
-            coord_hit: ''
+            coord_hit: '',
+            score_opponent: 0,
+            score_you: 0
         }
     this.onBtnClick = this.onBtnClick.bind(this);
+    this.Reset = this.Reset.bind(this);
     }
 
     onBtnClick() {
         this.props.rerenderParentCallback();
+    }
+
+    Reset() {
+        this.props.reset()
+        console.log("Reset")
     }
 
 
@@ -46,10 +54,24 @@ class OpponentGrid extends React.Component {
         }, 1500)
     }
 
+    DisplayScore = () => {
+        let score = document.getElementsByClassName("score")
+        for (const div of score) {
+            div.innerHTML = `<br/>Score<br/>Vous: <b>${this.state.score_you}</b><br/>Automate: <b>${this.state.score_opponent}</b>`
+        }
+    }
+
+    ResetShipsHealth = () => {
+        for (let i=0; i < ships.length; i++) {
+            ships[i].hit = 0;
+            algo_ships[i].hit = 0;
+        }
+    }
+
     On_Trigger = (cell_id) => {
-        let index = cell_id[0]*10 + cell_id[1]
-        let grid = this.props.grid
-        let text = ''
+        let grid = this.props.grid;
+        let index = cell_id[0]*10 + cell_id[1];
+        let text = '';
 
         if (grid[index].valeur === null) {
             grid[index].display = '🌀';
@@ -81,22 +103,23 @@ class OpponentGrid extends React.Component {
         this.setState({
             opponent_grid: grid,
         })
-        setTimeout(() => {this.Algo_player()}, 1000)
+
+        setTimeout(() => {this.Algo_player()}, 500)
     }
 
 
     Algo_player = () => {
-        let grid = this.props.your_grid
-        let algo_grid = this.props.grid
-        let n = 0
-        let r = []
-        let r_idx = []
-        let available = []
-        let count_strike = 0
-        let count_miss = 0
-        let coord_strike = []
-        let coord_hit = this.state.coord_hit
-        let text = ''
+        let grid = this.props.your_grid;
+        let algo_grid = this.props.grid;
+        let n = 0;
+        let r = [];
+        let r_idx = [];
+        let available = [];
+        let count_strike = 0;
+        let count_miss = 0;
+        let coord_strike = [];
+        let coord_hit = this.state.coord_hit;
+        let text = '';
         
         for (let i=0; i < grid.length; i++) {
             if ((grid[i].display === '💥')) {
@@ -153,8 +176,8 @@ class OpponentGrid extends React.Component {
         
         else if (count_strike === 1)  {
             let i = coord_hit[coord_hit.length - 1]
-            console.log("coord_hit_ref:", i)
-            console.log("coord_strike:", coord_strike)
+            // console.log("coord_hit_ref:", i)
+            // console.log("coord_strike:", coord_strike)
 
             for (const ship of ships) {
                 // Vertical
@@ -337,16 +360,16 @@ class OpponentGrid extends React.Component {
                     }
                 }
             
-            this.Check_defeat_you(grid, algo_grid)
+            this.Check_defeat_you(grid)
         }
-        console.log("coord_hit:", coord_hit)
+        // console.log("coord_hit:", coord_hit)
 
     }
      
 
         else if (count_strike >= 2) {
             let i = coord_hit[coord_hit.length - 1]
-            console.log("coord_hit_ref:", i)
+            // console.log("coord_hit_ref:", i)
             
 
             for (const ship of ships) {
@@ -362,7 +385,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i + 10)
                             console.log("touché en bas")
                             coord_hit.push(i+10)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -374,7 +397,7 @@ class OpponentGrid extends React.Component {
                                 grid[i + 10].display = '🌀'
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                     }
@@ -387,7 +410,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i - 10)
                             console.log("touché en haut")
                             coord_hit.push(i-10)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -399,14 +422,14 @@ class OpponentGrid extends React.Component {
                                 grid[i - 10].display = '🌀'
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                     }
                     if ((grid[i - 10].display === '💥') && ((grid[i + 10].display === '🌀') || grid[i + 10].display === '☠️')) {
 
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit_list:", coord_hit)
+                        // console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i - 10].valeur === ship.emo) {
@@ -417,7 +440,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i - 10)
                             console.log("touché en bas")
                             coord_hit.push(i - 10)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -428,14 +451,13 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 10].display === null) {
                                 grid[i - 10].display = '🌀'
                                 console.log("dans l'eau")
-                                // coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                     }
                     else if (grid[i + 10].display === '💥' && ((grid[i - 10].display === '🌀') || (grid[i - 10].display === '☠️'))) {
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit_list:", coord_hit)
+                        // console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i + 10].valeur === ship.emo) {
@@ -446,7 +468,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i + 10)
                             console.log("touché en haut")
                             coord_hit.push(i + 10)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -457,8 +479,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 10].display === null) {
                                 grid[i + 10].display = '🌀'
                                 console.log("dans l'eau")
-                                // coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                     }
@@ -468,7 +489,7 @@ class OpponentGrid extends React.Component {
                     if (grid[i + 10].display === '💥') {
 
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit_list:", coord_hit)
+                        // console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
                         if ((grid[i + 10].valeur === ship.emo) && (grid[i + 10].display !== '☠️')) {
@@ -479,7 +500,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i + 10)
                             console.log("touché en bas")
                             coord_hit.push(i + 10)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -490,8 +511,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 10].display === null) {
                                 grid[i + 10].display = '🌀'
                                 console.log("dans l'eau")
-                                // coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
                         }
@@ -500,7 +520,7 @@ class OpponentGrid extends React.Component {
                         if (grid[i - 10].display === '💥') {
     
                             coord_hit = coord_hit.reverse()
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             i = coord_hit[coord_hit.length - 1]
                             console.log("hit_ref:", i)
     
@@ -512,7 +532,7 @@ class OpponentGrid extends React.Component {
                                 coord_strike.push(i - 10)
                                 console.log("touché en bas")
                                 coord_hit.push(i - 10)
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 let sunk_text = this.Check_sunk_you(grid, ship, coord_hit, text)
                                 if (sunk_text) {
                                     text = sunk_text
@@ -522,8 +542,7 @@ class OpponentGrid extends React.Component {
                             else if (grid[i - 10].display === null) {
                                     grid[i - 10].display = '🌀'
                                     console.log("dans l'eau")
-                                    // coord_hit = coord_hit.reverse()
-                                    console.log("coord_hit_list:", coord_hit)
+                                    // console.log("coord_hit_list:", coord_hit)
                                     break
                                 }
                             }
@@ -541,7 +560,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i-1)
                             console.log("touché à gauche")
                             coord_hit.push(i-1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -553,7 +572,7 @@ class OpponentGrid extends React.Component {
                                 grid[i - 1].display = '🌀'
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                         }
@@ -567,7 +586,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i+1)
                             console.log("touché à droite")
                             coord_hit.push(i+1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -579,7 +598,7 @@ class OpponentGrid extends React.Component {
                                 grid[i + 1].display = '🌀'
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
                         }
@@ -587,7 +606,7 @@ class OpponentGrid extends React.Component {
                     if ((grid[i + 1].display === '💥') && ((grid[i - 1].display === '🌀') || (grid[i - 1].display === '☠️'))) {
 
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit_list:", coord_hit)
+                        // console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i + 1].valeur === ship.emo) {
@@ -598,7 +617,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i-1)
                             console.log("touché à gauche")
                             coord_hit.push(i + 1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -609,8 +628,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 1].display === null) {
                                 grid[i + 1].display = '🌀'
                                 console.log("dans l'eau")
-                                // coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
                         }
@@ -618,7 +636,7 @@ class OpponentGrid extends React.Component {
                     else if ((grid[i - 1].display === '💥') && ((grid[i + 1].display === '🌀') || (grid[i + 1].display === '☠️'))) {
 
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit_list:", coord_hit)
+                        // console.log("coord_hit_list:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
 
                         if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
@@ -629,7 +647,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i - 1)
                             console.log("touché à droite")
                             coord_hit.push(i - 1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -640,8 +658,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 1].display === null) {
                                 grid[i - 1].display = '🌀'
                                 console.log("dans l'eau")
-                                // coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
                         }
@@ -651,9 +668,9 @@ class OpponentGrid extends React.Component {
                     if (grid[i + 1].display === '💥') {
 
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
-                        console.log("hit ref:", i)
+                        // console.log("coord_hit:", coord_hit)
+                        // console.log("hit ref:", i)
 
                         if ((grid[i + 1].valeur === ship.emo) && (grid[i + 1].display !== '☠️')) {
                             console.log("here:", ship.emo)
@@ -663,7 +680,7 @@ class OpponentGrid extends React.Component {
                             coord_strike.push(i + 1)
                             console.log("touché en bas")
                             coord_hit.push(i + 1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -675,7 +692,7 @@ class OpponentGrid extends React.Component {
                                 grid[i + 1].display = '🌀'
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
                         }
@@ -684,9 +701,9 @@ class OpponentGrid extends React.Component {
                     if (grid[i - 1].display === '💥') {
     
                         coord_hit = coord_hit.reverse()
-                        console.log("coord_hit:", coord_hit)
                         i = coord_hit[coord_hit.length - 1]
-                        console.log("hit ref:", i)
+                        // console.log("coord_hit:", coord_hit)
+                        // console.log("hit ref:", i)
 
                         if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
                             console.log("here:", ship.emo)
@@ -758,63 +775,74 @@ class OpponentGrid extends React.Component {
         }
     }
 
-    Check_defeat_algo = (grid) => {
+    Check_defeat_algo = (algo_grid) => {
         let count = 0
-        for (let i=0; i < grid.length; i++) {
-            if (grid[i].display === '☠️') {
+        for (let i=0; i < algo_grid.length; i++) {
+            if (algo_grid[i].display === '☠️') {
                 count+= 1
             }
         }
         if (count === 14) {
+            this.setState({score_you: this.state.score_you += 1});
             setTimeout(() => {
                 let id = 1
-                this.EndGameModal(id)
-            }, 150)
-            
+                this.EndGameModal(id, algo_grid)
+            }, 1)
         }
     }
 
-    Check_defeat_you = (grid, algo_grid) => {
+    Check_defeat_you = (your_grid, algo_grid) => {
         let count = 0
-        for (let i=0; i < grid.length; i++) {
-            if (grid[i].display === '☠️') {
+        for (let i=0; i < your_grid.length; i++) {
+            if (your_grid[i].display === '☠️') {
                 count+= 1
             }
         }
         if (count === 14) {
-            for (let i=0; i < algo_grid.length; i++) {
-                for (const ship of algo_ships) {
-                if ((algo_grid[i].valeur === ship.emo) && ((algo_grid[i].display === null) || (algo_grid[i].display === '💥'))) {
-                    algo_grid[i].display = ship.emo
+            this.RevealAlgoShipsWhenDefeatYou(algo_grid);
+            this.setState({score_opponent: this.state.score_opponent += 1});
+            
+            setTimeout(() => {
+                let id = 0
+                this.EndGameModal(id, your_grid)
+            }, 20)
+        }
+    }
+
+    RevealAlgoShipsWhenDefeatYou = (algo_grid) => {
+        for (let i=0; i < algo_grid.length; i++) {
+            for (const ship of algo_ships) {
+            if ((algo_grid[i].valeur === ship.emo) && ((algo_grid[i].display === null) || (algo_grid[i].display === '💥'))) {
+                algo_grid[i].display = ship.emo
                 }
             }
         }
-            setTimeout(() => {
-                let id = 0
-                this.EndGameModal(id)
-            }, 150)
-        }
-    } 
+        this.setState({
+            opponent_grid: algo_grid
+        })
+    }
 
 
-    EndGameModal(grid_id) {
+    EndGameModal(grid_id, grid) {
 
         if (grid_id === 0) {
-            
+
             let modal = document.getElementById("Modal-defeat");
             modal.style.display = "block";
+            this.DisplayScore();
+            this.ResetShipsHealth();
 
             let span = document.getElementsByClassName("close")[0];
             
-            span.onclick = function() {
+            span.onclick = (event) => {
             modal.style.display = "none";
-            window.location.reload()
+            this.Reset();
             }
 
-            window.onclick = function(event) {
+            window.onclick = (event) => {
             if (event.target === modal) {
                 modal.style.display = "none";
-                window.location.reload()
+                this.Reset();
                 }
             }
         }
@@ -823,18 +851,20 @@ class OpponentGrid extends React.Component {
             
             let modal = document.getElementById("Modal-victory");
             modal.style.display = "block";
+            this.DisplayScore();
+            this.ResetShipsHealth();
 
             let span = document.getElementsByClassName("close")[0];
 
-            span.onclick = function() {
+            span.onclick = (event) => {
             modal.style.display = "none";
-            window.location.reload()
+            this.Reset();
             }
 
-            window.onclick = function(event) {
+            window.onclick = (event) => {
             if (event.target === modal) {
                 modal.style.display = "none";
-                window.location.reload()
+                this.Reset();
                 }
             }
         }

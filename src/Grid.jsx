@@ -93,7 +93,7 @@ class Grid extends React.Component {
             if (count_h === ship.size) {
                 for (let i=0; i < ship.size; i++) {
                         grid1[cell_id[0]*10 + cell_id[1] + i].valeur = ship.emo;
-                        grid1[cell_id[0]*10 + cell_id[1] + i].display = ship.emo
+                        grid1[cell_id[0]*10 + cell_id[1] + i].display = ship.emo;
                         }
                     }   
             this.setState({grid: grid1})
@@ -122,7 +122,7 @@ class Grid extends React.Component {
             if (count_v === ship.size) {
                 for (let i=0; i < ship.size; i++) {
                         grid1[cell_id[0]*10 + (i*10) + cell_id[1]].valeur = ship.emo;
-                        grid1[cell_id[0]*10 + (i*10) + cell_id[1]].display = ship.emo
+                        grid1[cell_id[0]*10 + (i*10) + cell_id[1]].display = ship.emo;
                         }
                     }
              this.setState({grid: grid1})
@@ -163,7 +163,6 @@ class Grid extends React.Component {
 
     Display_opp_grid()  {
         
-        console.log("pressed")
         let opp_grid = document.getElementById("opp-grid")
         opp_grid.style.display = 'block'
 
@@ -173,7 +172,24 @@ class Grid extends React.Component {
         let div_settings = document.getElementById('grid-setting')
         div_settings.style.display = 'none'
 
-        this.setState({selected_ship: []})
+        let direction = document.getElementsByName('direction')
+        for (let i = 0; i < direction.length; i++) {
+            if (direction[i].checked === true) {
+                direction[i].checked = false
+            }
+        }
+
+        let ship = document.getElementsByName('ship')
+        for (let i = 0; i < ship.length; i++) {
+            if (ship[i].checked === true) {
+                ship[i].checked = false
+            }
+        }
+
+        this.setState({
+            selected_ship: [],
+            direction: []
+        })
 
     }
 

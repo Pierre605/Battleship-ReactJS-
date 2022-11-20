@@ -15,6 +15,7 @@ class App extends React.Component {
             opponent_grid: []
         }
         this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+        this.ResetGame = this.ResetGame.bind(this);
       }
 
     
@@ -32,11 +33,30 @@ class App extends React.Component {
         }
 
     ResetGame() {
-        const size_grid = 10
+        const size_grid = 10;
         this.setState({
             grid: this.GenerateGrid(size_grid),
             opponent_grid: this.MakeOpponentGrid(size_grid),
-        })
+        });
+
+        // Reset start settings
+        let cells = document.getElementsByClassName('cell')
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.border = '1px solid black'
+            cells[i].style.backgroundColor = 'rgb(1, 34, 123)';
+            }
+        
+        let opp_grid = document.getElementById("opp-grid")
+        opp_grid.style.display = 'none'
+
+        let vs_img = document.getElementById("vs")
+        vs_img.style.display = 'none'
+
+        let div_settings = document.getElementById('grid-setting')
+        div_settings.style.display = 'block'
+
+        let play = document.getElementById("play")
+        play.style.display = 'none'
     }
     
 
@@ -171,6 +191,7 @@ class App extends React.Component {
                                 <span class="close"></span>
                                 <p>Victoire ! Vous avez coulé tous les navires ennemis 🥳</p>
                                 <img id="vic-pic" alt="victory" src={app_gh_pages_URL + 'victory_pic.png'} />
+                                <div className="score"></div>
                             </div>
                         </div>
                         <div id="Modal-defeat" class="modal">
@@ -178,6 +199,7 @@ class App extends React.Component {
                                 <span class="close"></span>
                                 <p>Défaite. Tous vos navires ont été coulé 🥴</p>
                                 <img id="loose-pic" alt="defeat" src={app_gh_pages_URL + 'defeat_pic.png'} />
+                                <div className="score"></div>
                             </div>
                         </div>
                         <div id="info">
@@ -186,7 +208,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     <div id="opp-grid">
-                        <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.MakeOpponentGrid} />
+                        <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.ResetGame} />
                     </div>
                 </React.StrictMode>
                 </div>
