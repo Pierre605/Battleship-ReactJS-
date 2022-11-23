@@ -74,6 +74,7 @@ code {
 #info {
   width: 12em;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   font-size: 1.5em;
@@ -165,6 +166,7 @@ code {
   #info {
     width: 10em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     text-align: center;
     font-size: 1.2em;

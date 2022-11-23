@@ -67,25 +67,27 @@ class Grid extends React.Component {
             this.setState({grid: grid1})
 
         setTimeout(() => {this.ChangeCells()}, 0);
+        this.ReadyGridCheck(grid1);
             
 
         if (this.state.direction === 'h')  {
             for (let i=0; i < ship.size; i++) {
+                if (cell_id[0]*10 + cell_id[1] + ship.size - 1 < ((cell_id[0]+1)*10)) {
 
-                if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
-                    
-                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
-                        count_h += 1 
+                    if ((cell_id[0] > 0) && (cell_id[0] < 9)) {
+                        if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
+                            count_h += 1 
+                            }
                         }
-                    }
-                else if (cell_id[0] === 0) {
-                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
-                        count_h += 1 
+                    else if (cell_id[0] === 0) {
+                        if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] + 1)*10 + cell_id[1] + i].valeur === null) )  {
+                            count_h += 1 
+                            }
                         }
-                    }
-                else if (cell_id[0] === 9) {
-                    if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) )  {
-                        count_h += 1 
+                    else if (cell_id[0] === 9) {
+                        if ((grid1[cell_id[0]*10 + cell_id[1] + i].valeur === null) && (grid1[(cell_id[0] - 1)*10 + cell_id[1] + i].valeur === null) )  {
+                            count_h += 1 
+                            }
                         }
                     }
                 }
@@ -128,9 +130,12 @@ class Grid extends React.Component {
              this.setState({grid: grid1})
             }
 
-        setTimeout(() => {this.ChangeCells()}, 0)
-        
-        // Ready grid check
+        setTimeout(() => {this.ChangeCells()}, 0);
+        this.ReadyGridCheck(grid1);
+    }
+
+
+    ReadyGridCheck(grid1) {
         let play = document.getElementById("play")
         let count_full = 0
         for (let i=0; i < grid1.length; i++) {
@@ -145,6 +150,7 @@ class Grid extends React.Component {
             play.style.display = 'none'
         }
     }
+
 
     ChangeCells = () => {
         let cells = document.getElementsByClassName('cell')
