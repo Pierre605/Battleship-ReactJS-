@@ -170,6 +170,7 @@ code {
     justify-content: center;
     text-align: center;
     font-size: 1.2em;
+    position: absolute;
     top: 350px;
   }
 
