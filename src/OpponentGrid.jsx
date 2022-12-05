@@ -98,13 +98,14 @@ class OpponentGrid extends React.Component {
             }
         }
         this.DisplayYourShootReport(text);
-        console.log(cell_id);
+        // console.log("cell_id", cell_id);
+        // console.log("grid index", cell_id[0]*10 + cell_id[1])
 
         this.setState({
             opponent_grid: grid,
         })
 
-        setTimeout(() => {this.Algo_player()}, 500)
+        setTimeout(() => {this.Algo_player()}, 400)
     }
 
 
@@ -148,9 +149,11 @@ class OpponentGrid extends React.Component {
             while (n < available.length * 10) {
                 let random_place_i = Math.floor(Math.random() * available.length);
                 n++;
-                r.push(available[random_place_i]);
+                if (r.includes(available[random_place_i]) === false) {
+                    r.push(available[random_place_i]);
+                }
             }
-    
+
             for (let i=0; i < r.length; i++) {
                 r_idx.push(r[i].id[0]*10 + r[i].id[1])
             }
@@ -166,11 +169,135 @@ class OpponentGrid extends React.Component {
                         coord_hit.push(r_idx[i])
                         break
                     }
-                else if (grid[r_idx[i]].display === null) {
-                    grid[r_idx[i]].display = '🌀'
-                    break
+                    
+                    else if (grid[r_idx[i]].valeur === null) {
+
+                        // fully null surrounded avoid
+                        if (available.length > 20) {
+                            // middle
+                            if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // top left corner
+                            else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 0)) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // top right corner
+                            else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 9)) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // down left corner
+                            else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 0)) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // down right corner
+                            else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 9)) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // top edge
+                            else if (grid[r_idx[i]].id[0] === 0) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // down edge
+                            else if (grid[r_idx[i]].id[0] === 9) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // left edge
+                            else if (grid[r_idx[i]].id[1] === 0) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                            // right edge
+                            else if (grid[r_idx[i]].id[1] === 9) {
+                                if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
+                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    i++;
+                                    // console.log("Iteration UU :", i)
+                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
+                                }
+                                else {
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                            }
+                    }
+                    else {
+                        grid[r_idx[i]].display = '🌀'
+                        break
+                    }
                 }
-            } break
+            }  break
         }
     }
         

@@ -85,8 +85,8 @@ class App extends React.Component {
             r.push(tab[random_place_i]);
         }
 
-        console.log("ship emo:", ship.emo)
-        console.log("DIRECTION:", random_dir)
+        // console.log("ship emo:", ship.emo)
+        // console.log("DIRECTION:", random_dir)
 
         if (random_dir === 'h') {
             for (let i=0; i < r.length; i++) {
