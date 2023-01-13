@@ -212,7 +212,7 @@ class App extends React.Component {
                             Your browser does not support the audio element.
                         </audio>
                         <audio id='sunk-sound'>
-                            <source src={app_gh_pages_URL + 'sunk_sound.mp3'} type="audio/mpeg"/>
+                            <source src={app_gh_pages_URL + 'sunk_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
                     </div>
