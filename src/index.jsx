@@ -208,7 +208,11 @@ class App extends React.Component {
                             <div id='info-algo-grid'></div>
                         </div>
                         <audio id='hit-sound'>
-                            <source src="hit-sound.wav" type="audio/x-wav"/>
+                            <source src={app_gh_pages_URL + 'hit_sound.wav'} type="audio/x-wav"/>
+                            Your browser does not support the audio element.
+                        </audio>
+                        <audio id='sunk-sound'>
+                            <source src={app_gh_pages_URL + 'sunk_sound.mp3'} type="audio/mpeg"/>
                             Your browser does not support the audio element.
                         </audio>
                     </div>

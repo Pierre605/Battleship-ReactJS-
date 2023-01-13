@@ -38,11 +38,21 @@ class OpponentGrid extends React.Component {
 
     DisplayAlgoShootReport = (text) => {
         let info = document.getElementById("info-your-grid")
-        info.textContent = text
-        // let hit_sound = document.getElementById("hit-sound")
-        // if (text) {
-        //     hit_sound.play()
-        // }
+        info.textContent = text;
+        let hit_sound = document.getElementById("hit-sound")
+        hit_sound.volume = 0.7;
+        let sunk_sound = document.getElementById("sunk-sound")
+        sunk_sound.volume = 0.7;
+
+        if (text) {
+            if (text.includes('est coulé 😵')) {
+                sunk_sound.play()
+            }
+            else {
+            hit_sound.play()
+            }
+        }
+
         setTimeout(() => {
             text = '';
             info.textContent = text
@@ -51,11 +61,19 @@ class OpponentGrid extends React.Component {
 
     DisplayYourShootReport = (text) => {
         let info = document.getElementById("info-algo-grid")
-        info.textContent = text
+        info.textContent = text;
         let hit_sound = document.getElementById("hit-sound")
-        // hit_sound.autoplay = true;
-        // hit_sound.load();
-        // console.log('audio', hit_sound)
+        hit_sound.volume = 0.7;
+        let sunk_sound = document.getElementById("sunk-sound")
+        sunk_sound.volume = 0.7;
+
+        if (text.includes('ennemi coulé 💯')) {
+            sunk_sound.play()
+        }
+        else {
+        hit_sound.play()
+        }
+
         setTimeout(() => {
             text = '';
             info.textContent = text
