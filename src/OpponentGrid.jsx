@@ -981,9 +981,11 @@ class OpponentGrid extends React.Component {
             modal.style.display = "block";
             this.DisplayScore();
             this.ResetShipsHealth();
+            let loose_sound = document.getElementById("loose-sound")
+            loose_sound.volume = 0.8
+            loose_sound.play();
 
-            let span = document.getElementsByClassName("close")[0];
-            
+            let span = document.getElementsByClassName("close")[0]; 
             span.onclick = (event) => {
             modal.style.display = "none";
             this.Reset();
@@ -1003,9 +1005,11 @@ class OpponentGrid extends React.Component {
             modal.style.display = "block";
             this.DisplayScore();
             this.ResetShipsHealth();
+            let win_sound = document.getElementById("win-sound")
+            win_sound.volume = 0.8
+            win_sound.play();
 
             let span = document.getElementsByClassName("close")[0];
-
             span.onclick = (event) => {
             modal.style.display = "none";
             this.Reset();

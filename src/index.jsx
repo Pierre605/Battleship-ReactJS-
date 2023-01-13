@@ -215,6 +215,14 @@ class App extends React.Component {
                             <source src={app_gh_pages_URL + 'sunk_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
+                        <audio id='loose-sound'>
+                            <source src={app_gh_pages_URL + 'loose_sound.wav'} type="audio/x-wav"/>
+                            Your browser does not support the audio element.
+                        </audio>
+                        <audio id='win-sound'>
+                            <source src={app_gh_pages_URL + 'win_sound.wav'} type="audio/x-wav"/>
+                            Your browser does not support the audio element.
+                        </audio>
                     </div>
                     <div id="opp-grid">
                         <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.ResetGame} />
