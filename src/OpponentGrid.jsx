@@ -39,6 +39,10 @@ class OpponentGrid extends React.Component {
     DisplayAlgoShootReport = (text) => {
         let info = document.getElementById("info-your-grid")
         info.textContent = text
+        // let hit_sound = document.getElementById("hit-sound")
+        // if (text) {
+        //     hit_sound.play()
+        // }
         setTimeout(() => {
             text = '';
             info.textContent = text
@@ -48,6 +52,10 @@ class OpponentGrid extends React.Component {
     DisplayYourShootReport = (text) => {
         let info = document.getElementById("info-algo-grid")
         info.textContent = text
+        let hit_sound = document.getElementById("hit-sound")
+        // hit_sound.autoplay = true;
+        // hit_sound.load();
+        // console.log('audio', hit_sound)
         setTimeout(() => {
             text = '';
             info.textContent = text
@@ -75,7 +83,7 @@ class OpponentGrid extends React.Component {
 
         if (grid[index].valeur === null) {
             grid[index].display = '🌀';
-            text = "Manqué !"
+            // text = "Manqué !"
             }
         else if (grid[index].display in ['🌀', '💥']) {
             text = ''
@@ -94,13 +102,10 @@ class OpponentGrid extends React.Component {
                         text = sunk_text
                     }
                     this.Check_defeat_algo(grid)
+                    this.DisplayYourShootReport(text);
                 }
             }
         }
-        this.DisplayYourShootReport(text);
-        // console.log("cell_id", cell_id);
-        // console.log("grid index", cell_id[0]*10 + cell_id[1])
-
         this.setState({
             opponent_grid: grid,
         })
@@ -913,7 +918,7 @@ class OpponentGrid extends React.Component {
             this.setState({score_you: this.state.score_you += 1});
             setTimeout(() => {
                 let id = 1
-                this.EndGameModal(id, algo_grid)
+                this.EndGameModal(id)
             }, 1)
         }
     }
@@ -931,7 +936,7 @@ class OpponentGrid extends React.Component {
             
             setTimeout(() => {
                 let id = 0
-                this.EndGameModal(id, your_grid)
+                this.EndGameModal(id)
             }, 20)
         }
     }
@@ -950,7 +955,7 @@ class OpponentGrid extends React.Component {
     }
 
 
-    EndGameModal(grid_id, grid) {
+    EndGameModal(grid_id) {
 
         if (grid_id === 0) {
 

@@ -32,6 +32,7 @@ class App extends React.Component {
             })
         }
 
+
     ResetGame() {
         const size_grid = 10;
         this.setState({
@@ -206,6 +207,10 @@ class App extends React.Component {
                             <div id='info-your-grid'></div>
                             <div id='info-algo-grid'></div>
                         </div>
+                        <audio id='hit-sound'>
+                            <source src="hit-sound.wav" type="audio/x-wav"/>
+                            Your browser does not support the audio element.
+                        </audio>
                     </div>
                     <div id="opp-grid">
                         <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.ResetGame} />
