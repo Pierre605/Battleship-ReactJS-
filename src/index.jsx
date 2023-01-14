@@ -87,9 +87,6 @@ class App extends React.Component {
             r.push(tab[random_place_i]);
         }
 
-        // console.log("ship emo:", ship.emo)
-        // console.log("DIRECTION:", random_dir)
-
         if (random_dir === 'h') {
             for (let i=0; i < r.length; i++) {
                 if (r[i].id[1] <=  (10 - ship.size)) {
@@ -120,7 +117,7 @@ class App extends React.Component {
 
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + i].valeur = ship.emo;
-                tab[tab_index + i].display = ship.emo
+                // tab[tab_index + i].display = ship.emo
                 }
             }
     
@@ -156,7 +153,7 @@ class App extends React.Component {
 
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + (i*10)].valeur = ship.emo
-                tab[tab_index + (i*10)].display = ship.emo
+                // tab[tab_index + (i*10)].display = ship.emo
             }
         }
 
