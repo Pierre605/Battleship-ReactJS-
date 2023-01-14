@@ -12,7 +12,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             grid: [],
-            opponent_grid: []
+            opponent_grid: [],
+            sound_pic_src: 'sound_off.png',
         }
         this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
         this.ResetGame = this.ResetGame.bind(this);
@@ -119,7 +120,7 @@ class App extends React.Component {
 
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + i].valeur = ship.emo;
-                // tab[tab_index + i].display = ship.emo
+                tab[tab_index + i].display = ship.emo
                 }
             }
     
@@ -155,7 +156,7 @@ class App extends React.Component {
 
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + (i*10)].valeur = ship.emo
-                // tab[tab_index + (i*10)].display = ship.emo
+                tab[tab_index + (i*10)].display = ship.emo
             }
         }
 
@@ -176,10 +177,16 @@ class App extends React.Component {
 
     MuteSwitch = (elem) => {
         if (!(elem.muted)) {
+            this.setState({
+                sound_pic_src: 'sound_off.png'
+            })
             elem.muted = true;
             elem.pause()
         }
         else {
+            this.setState({
+                sound_pic_src: 'sound_on.png'
+            })
             elem.muted = false
             elem.load()
         }
@@ -193,7 +200,7 @@ class App extends React.Component {
         return (  
             <>
             <h2 className='title'>BATAILLE NAVALE</h2>
-            <img alt='sound on icon' src={app_gh_pages_URL + 'sound_on.png'} className='sound-icons' onClick={() => this.MuteAll()}/>
+            <img id='sound-icon' alt='sound icon' src={app_gh_pages_URL + this.state.sound_pic_src} onClick={() => this.MuteAll()}/>
                 <div id='grids'>
                 <React.StrictMode>
                     <div>
@@ -222,19 +229,19 @@ class App extends React.Component {
                             <div id='info-your-grid'></div>
                             <div id='info-algo-grid'></div>
                         </div>
-                        <audio id='hit-sound'>
+                        <audio muted id='hit-sound'>
                             <source src={app_gh_pages_URL + 'hit_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
-                        <audio id='sunk-sound'>
+                        <audio muted id='sunk-sound'>
                             <source src={app_gh_pages_URL + 'sunk_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
-                        <audio id='loose-sound'>
+                        <audio muted id='loose-sound'>
                             <source src={app_gh_pages_URL + 'loose_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
-                        <audio id='win-sound'>
+                        <audio muted id='win-sound'>
                             <source src={app_gh_pages_URL + 'win_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>

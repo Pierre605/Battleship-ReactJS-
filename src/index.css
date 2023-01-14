@@ -20,11 +20,12 @@ h2 {
   font-size: x-large;
 }
 
-.sound-icons {
+#sound-icon {
   cursor: pointer;
-  width: 10%;
+  width: 4%;
   float: right;
-  margin-top: -30px;
+  margin-top: -37px;
+  margin-right: 2%;
 }
 
 #ships-pics {
@@ -162,6 +163,10 @@ code {
     font-size: larger;
   }
 
+  #sound-icon {
+    width: 5%;
+  }
+
   #vs {
     display: none;
     width: 15em;
@@ -201,7 +206,11 @@ code {
 @media screen and (min-width: 2px) and (max-width: 555px) {
   h2 {
   font-size: 15px;
-}
+  }
+
+  #sound-icon {
+    width: 6%;
+  }
 
   #vs {
     display: none;
