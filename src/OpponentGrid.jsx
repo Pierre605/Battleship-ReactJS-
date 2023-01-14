@@ -182,28 +182,130 @@ class OpponentGrid extends React.Component {
             }
     
             for (let i=0; i < r_idx.length; i++) {
-                for (const ship of ships) {
-                    if (grid[r_idx[i]].valeur === ship.emo) {
+                    const isship = (element) => element['emo'] == grid[r_idx[i]].valeur;
+
+                    if (your_emos.includes(grid[r_idx[i]].valeur)) {
                         grid[r_idx[i]].display = '💥'
-                        ship.hit += 1
-                        console.log(`${ship.hit} hit`)
-                        console.log(`Votre ${ship.name} est touché`)
-                        text = `Votre ${ship.name} est touché 🤕`
+                        let indx_ship = ships.findIndex(isship)
+                        console.log(indx_ship)
+                        ships[indx_ship]['hit'] += 1
+                        console.log(ships[indx_ship]['name'], 'hit:', ships[indx_ship]['hit'])
+                        text = `Votre ${ships[indx_ship]['name']} est touché 🤕`
                         coord_hit.push(r_idx[i])
                         break
                     }
                     
                     else if (grid[r_idx[i]].valeur === null) {
+                        // Shoot in middle of free space
+                        if (available.length >= 60) {
+                            // middle
+                            if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // top left corner
+                            else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 0)) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // top right corner
+                            else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 9)) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // down left corner
+                            else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 0)) {
+                                if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // down right corner
+                            else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 9)) {
+                                if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // top edge
+                            else if (grid[r_idx[i]].id[0] === 0) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // down edge
+                            else if (grid[r_idx[i]].id[0] === 9) {
+                                if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // left edge
+                            else if (grid[r_idx[i]].id[1] === 0) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                            // right edge
+                            else if (grid[r_idx[i]].id[1] === 9) {
+                                if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
+                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    grid[r_idx[i]].display = '🌀';
+                                    break
+                                }
+                                else {
+                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                }
+                            }
+                        }
+
 
                         // fully null surrounded avoid
-                        if (available.length > 20) {
+                        else if (15 < available.length < 60) {
                             // middle
                             if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -214,9 +316,6 @@ class OpponentGrid extends React.Component {
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -227,9 +326,6 @@ class OpponentGrid extends React.Component {
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -240,9 +336,6 @@ class OpponentGrid extends React.Component {
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -253,9 +346,6 @@ class OpponentGrid extends React.Component {
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -266,9 +356,6 @@ class OpponentGrid extends React.Component {
                             else if (grid[r_idx[i]].id[0] === 0) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -279,9 +366,6 @@ class OpponentGrid extends React.Component {
                             else if (grid[r_idx[i]].id[0] === 9) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -292,9 +376,6 @@ class OpponentGrid extends React.Component {
                             else if (grid[r_idx[i]].id[1] === 0) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -305,9 +386,6 @@ class OpponentGrid extends React.Component {
                             else if (grid[r_idx[i]].id[1] === 9) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
                                     console.log("USELESS SHOOT:", grid[r_idx[i]].id);
-                                    i++;
-                                    // console.log("Iteration UU :", i)
-                                    console.log("grid[r_idx[i]].id UU :", grid[r_idx[i]].id)
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -319,8 +397,7 @@ class OpponentGrid extends React.Component {
                         grid[r_idx[i]].display = '🌀'
                         break
                     }
-                }
-            }  break
+            }
         }
     }
         
