@@ -174,11 +174,26 @@ class App extends React.Component {
         return tab
     }
 
+    MuteSwitch = (elem) => {
+        if (!(elem.muted)) {
+            elem.muted = true;
+            elem.pause()
+        }
+        else {
+            elem.muted = false
+            elem.load()
+        }
+    }
+
+    MuteAll = () => {
+        document.querySelectorAll("audio").forEach(elem => this.MuteSwitch(elem))
+    }
 
     render() {
         return (  
             <>
             <h2 className='title'>BATAILLE NAVALE</h2>
+            <img alt='sound on icon' src={app_gh_pages_URL + 'sound_on.png'} className='sound-icons' onClick={() => this.MuteAll()}/>
                 <div id='grids'>
                 <React.StrictMode>
                     <div>
