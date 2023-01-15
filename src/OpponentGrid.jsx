@@ -39,45 +39,33 @@ class OpponentGrid extends React.Component {
     DisplayAlgoShootReport = (text) => {
         let info = document.getElementById("info-your-grid")
         info.textContent = text;
-        let hit_sound = document.getElementById("hit-sound")
-        hit_sound.volume = 0.7;
-        let sunk_sound = document.getElementById("sunk-sound")
-        sunk_sound.volume = 0.7;
 
+        let hit_sound = document.getElementById("hit-sound")
+        let sunk_sound = document.getElementById("sunk-sound")
         if (text) {
-            if (text.includes('est coulé 😵')) {
+            if (text.includes('est coulé')) {
                 sunk_sound.play()
             }
             else {
             hit_sound.play()
             }
         }
-
-        setTimeout(() => {
-            text = '';
-            info.textContent = text
-        }, 1500)
     }
 
     DisplayYourShootReport = (text) => {
         let info = document.getElementById("info-algo-grid")
         info.textContent = text;
+
         let hit_sound = document.getElementById("hit-sound")
-        hit_sound.volume = 0.7;
         let sunk_sound = document.getElementById("sunk-sound")
-        sunk_sound.volume = 0.7;
-
-        if (text.includes('ennemi coulé 💯')) {
-            sunk_sound.play()
+        if (text) {
+            if (text.includes('ennemi coulé')) {
+                sunk_sound.play()
+            }
+            else {
+            hit_sound.play()
+            }
         }
-        else {
-        hit_sound.play()
-        }
-
-        setTimeout(() => {
-            text = '';
-            info.textContent = text
-        }, 1500)
     }
 
     DisplayScore = () => {
@@ -101,10 +89,12 @@ class OpponentGrid extends React.Component {
 
         if (grid[index].valeur === null) {
             grid[index].display = '🌀';
-            // text = "Manqué !"
+            text = '';
+            this.DisplayYourShootReport(text);
             }
         else if (grid[index].display in ['🌀', '💥']) {
-            text = ''
+            text = '';
+            this.DisplayYourShootReport(text);
         }
         else {
             for (const ship of algo_ships) {
@@ -203,6 +193,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -214,6 +205,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -225,6 +217,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -236,6 +229,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -247,6 +241,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -258,6 +253,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -269,6 +265,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -280,6 +277,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -291,6 +289,7 @@ class OpponentGrid extends React.Component {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
                                     console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                                 else {
@@ -309,6 +308,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -319,6 +319,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -329,6 +330,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -339,6 +341,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -349,6 +352,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -359,6 +363,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -369,6 +374,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -379,6 +385,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -389,6 +396,7 @@ class OpponentGrid extends React.Component {
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
+                                    text = '';
                                     break
                                 }
                             }
@@ -425,7 +433,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i +10].display === null) {
-                            grid[i +10].display = '🌀'
+                            grid[i +10].display = '🌀';
+                            text = '';
                             break
                         }
                     }
@@ -445,7 +454,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 10].display === null) {
-                            grid[i - 10].display = '🌀'
+                            grid[i - 10].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -468,7 +479,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 10].display === null) {
-                            grid[i + 10].display = '🌀'
+                            grid[i + 10].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -491,7 +504,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 10].display === null) {
-                            grid[i - 10].display = '🌀'
+                            grid[i - 10].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -515,7 +530,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 1].display === null) {
-                            grid[i + 1].display = '🌀'
+                            grid[i + 1].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -535,7 +552,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 1].display === null) {
-                            grid[i - 1].display = '🌀'
+                            grid[i - 1].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -558,7 +577,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 1].display === null) {
-                            grid[i + 1].display = '🌀'
+                            grid[i + 1].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -581,7 +602,9 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 1].display === null) {
-                            grid[i - 1].display = '🌀'
+                            grid[i - 1].display = '🌀';
+                            text = '';;
+                            text = '';
                             break
                         }
                     }
@@ -621,7 +644,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 10].display === null) {
-                                grid[i + 10].display = '🌀'
+                                grid[i + 10].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
@@ -646,7 +670,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 10].display === null) {
-                                grid[i - 10].display = '🌀'
+                                grid[i - 10].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
@@ -676,7 +701,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 10].display === null) {
-                                grid[i - 10].display = '🌀'
+                                grid[i - 10].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -704,7 +730,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 10].display === null) {
-                                grid[i + 10].display = '🌀'
+                                grid[i + 10].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -736,7 +763,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 10].display === null) {
-                                grid[i + 10].display = '🌀'
+                                grid[i + 10].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -767,7 +795,8 @@ class OpponentGrid extends React.Component {
                                 break
                             }
                             else if (grid[i - 10].display === null) {
-                                    grid[i - 10].display = '🌀'
+                                    grid[i - 10].display = '🌀';
+                                    text = '';
                                     console.log("dans l'eau")
                                     // console.log("coord_hit_list:", coord_hit)
                                     break
@@ -796,7 +825,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 1].display === null) {
-                                grid[i - 1].display = '🌀'
+                                grid[i - 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
@@ -822,7 +852,8 @@ class OpponentGrid extends React.Component {
                             break
                             }
                         else if (grid[i + 1].display === null) {
-                                grid[i + 1].display = '🌀'
+                                grid[i + 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
@@ -853,7 +884,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 1].display === null) {
-                                grid[i + 1].display = '🌀'
+                                grid[i + 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -883,7 +915,8 @@ class OpponentGrid extends React.Component {
                             break
                             }
                         else if (grid[i - 1].display === null) {
-                                grid[i - 1].display = '🌀'
+                                grid[i - 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -916,7 +949,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i + 1].display === null) {
-                                grid[i + 1].display = '🌀'
+                                grid[i + 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
@@ -949,7 +983,8 @@ class OpponentGrid extends React.Component {
                             break
                         }
                         else if (grid[i - 1].display === null) {
-                                grid[i - 1].display = '🌀'
+                                grid[i - 1].display = '🌀';
+                                text = '';
                                 console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 console.log("coord_hit_list:", coord_hit)
@@ -959,8 +994,8 @@ class OpponentGrid extends React.Component {
                     }
                 }
             } 
-        this.DisplayAlgoShootReport(text)
         this.Check_defeat_you(grid, algo_grid)
+        this.DisplayAlgoShootReport(text)
 
         this.setState({
             your_grid: grid,

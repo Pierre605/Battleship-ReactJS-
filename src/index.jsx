@@ -31,8 +31,16 @@ class App extends React.Component {
             grid: this.GenerateGrid(size_grid),
             opponent_grid: this.MakeOpponentGrid(size_grid),
             })
+        this.AudioVolumeSet()
         }
 
+    
+    AudioVolumeSet() {
+        let hit_sound = document.getElementById("hit-sound")
+        hit_sound.volume = 0.7;
+        let sunk_sound = document.getElementById("sunk-sound")
+        sunk_sound.volume = 0.8;
+    }
 
     ResetGame() {
         const size_grid = 10;
@@ -59,6 +67,11 @@ class App extends React.Component {
 
         let play = document.getElementById("play")
         play.style.display = 'none'
+
+        let info = document.getElementById("info-algo-grid")
+        info.textContent = '';
+        let info2 = document.getElementById("info-your-grid")
+        info2.textContent = '';
     }
     
 
