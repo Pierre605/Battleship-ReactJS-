@@ -240,13 +240,12 @@ code {
     }
     
   #info {
-    margin-top: -2px;
     width: 15em;
     flex-direction: row-reverse;
     text-align: start;
     font-size: 0.52em;
     position: absolute;
-    top: 230px;
+    top: 35.5%;
     align-items: baseline;
   }
 
