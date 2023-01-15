@@ -92,8 +92,8 @@ input[type=radio] {
     
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(10, 17.4px);
-        grid-template-rows: repeat(10, 17.4px);
+        grid-template-columns: repeat(10, 21px);
+        grid-template-rows: repeat(10, 21px);
         justify-content: center;
         border-radius: 6px;
     }
