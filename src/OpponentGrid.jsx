@@ -1091,6 +1091,8 @@ class OpponentGrid extends React.Component {
 
             let modal = document.getElementById("Modal-defeat");
             modal.style.display = "block";
+            let modal_content = document.getElementsByClassName('modal-content')
+            modal_content[1].style.marginTop = "9.5rem";
             this.DisplayScore();
             this.ResetShipsHealth();
             let loose_sound = document.getElementById("loose-sound")
@@ -1115,6 +1117,8 @@ class OpponentGrid extends React.Component {
             
             let modal = document.getElementById("Modal-victory");
             modal.style.display = "block";
+            let modal_content = document.getElementsByClassName('modal-content')
+            modal_content[0].style.marginTop = "-2rem";
             this.DisplayScore();
             this.ResetShipsHealth();
             let win_sound = document.getElementById("win-sound")
