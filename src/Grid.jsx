@@ -210,7 +210,10 @@ class Grid extends React.Component {
                     {ships.map((ship) => {
                         return (
                         <div className='aside'>
-                            <div>{ship.name} {ship.emo.repeat(ship.size)}</div>
+                            <div>
+                                <div>{ship.name}</div> 
+                                <div>{ship.emo.repeat(ship.size)}</div>
+                            </div>
                             <div onClick={this.SelectShips}>
                                 <input type="radio" id={ship.name} name="ship" value={ship}/>
                             </div>
