@@ -31,7 +31,10 @@ class App extends React.Component {
             grid: this.GenerateGrid(size_grid),
             opponent_grid: this.MakeOpponentGrid(size_grid),
             })
-        this.AudioVolumeSet()
+        this.AudioVolumeSet();
+        let x = window.matchMedia("(max-width: 555px)");
+        this.SmartphoneCSSModal(x, document.getElementsByClassName('modal-content'));
+        x.onchange = () => this.SmartphoneCSSModal(x, document.getElementsByClassName('modal-content'))
         }
 
     
@@ -41,6 +44,17 @@ class App extends React.Component {
         let sunk_sound = document.getElementById("sunk-sound")
         sunk_sound.volume = 0.8;
     }
+
+    SmartphoneCSSModal(x, elem) {
+        if (x.matches) {
+            elem[1].style.marginTop = "9.5rem";
+            elem[0].style.marginTop = "-2rem";
+        } 
+        else {
+            elem[1].style.marginTop = "0rem";
+            elem[0].style.marginTop = "0rem";
+        }
+      }
 
     ResetGame() {
         const size_grid = 10;

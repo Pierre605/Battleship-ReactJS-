@@ -1085,16 +1085,17 @@ class OpponentGrid extends React.Component {
     }
 
 
+      
     EndGameModal(grid_id) {
-
+        let x = window.matchMedia("(max-width: 555px)")
         if (grid_id === 0) {
 
             let modal = document.getElementById("Modal-defeat");
             modal.style.display = "block";
-            let modal_content = document.getElementsByClassName('modal-content')
-            modal_content[1].style.marginTop = "9.5rem";
+
             this.DisplayScore();
             this.ResetShipsHealth();
+            
             let loose_sound = document.getElementById("loose-sound")
             loose_sound.volume = 0.8
             loose_sound.play();
@@ -1117,10 +1118,10 @@ class OpponentGrid extends React.Component {
             
             let modal = document.getElementById("Modal-victory");
             modal.style.display = "block";
-            let modal_content = document.getElementsByClassName('modal-content')
-            modal_content[0].style.marginTop = "-2rem";
+
             this.DisplayScore();
             this.ResetShipsHealth();
+
             let win_sound = document.getElementById("win-sound")
             win_sound.volume = 0.8
             win_sound.play();
