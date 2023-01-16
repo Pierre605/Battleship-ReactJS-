@@ -44,8 +44,8 @@ input[type=radio] {
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(10, 31px);
-    grid-template-rows: repeat(10, 31px);
+    grid-template-columns: repeat(10, 34px);
+    grid-template-rows: repeat(10, 34px);
     justify-content: center;
     border: 2px solid black;
     border-radius: 6px;
@@ -69,8 +69,8 @@ input[type=radio] {
 
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(10, 27px);
-        grid-template-rows: repeat(10, 27px);
+        grid-template-columns: repeat(10, 29px);
+        grid-template-rows: repeat(10, 29px);
         justify-content: center;
     }
 }
@@ -92,8 +92,8 @@ input[type=radio] {
     
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(10, 21px);
-        grid-template-rows: repeat(10, 21px);
+        grid-template-columns: repeat(10, 23px);
+        grid-template-rows: repeat(10, 23px);
         justify-content: center;
         border-radius: 6px;
     }
