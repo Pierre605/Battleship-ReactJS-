@@ -227,8 +227,11 @@ class App extends React.Component {
             <img id='sound-icon' alt='sound icon' src={app_gh_pages_URL + this.state.sound_pic_src} onClick={() => this.MuteAll()}/>
                 <div id='grids'>
                 <React.StrictMode>
-                    <div>
+                    <div id="your-grid">
                         <Grid id={0} grid={this.state.grid} display={this.Display_opp_grid} />
+                        <div id="info-wrap-your-grid">
+                            <div id='info-your-grid'></div>
+                        </div>
                     </div>
                     <div id='center'>
                         <img id="vs" src={app_gh_pages_URL + "vs.png"} alt='versus'/>
@@ -249,11 +252,28 @@ class App extends React.Component {
                                 <div className="score"></div>
                             </div>
                         </div>
-                        <div id="info">
-                            <div id='info-your-grid'></div>
+                    </div>
+                    <div id="opp-grid">
+                        <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.ResetGame} />
+                        <div id="info-wrap-algo-grid">
                             <div id='info-algo-grid'></div>
                         </div>
-                        <audio muted id='hit-sound'>
+                    </div>
+                </React.StrictMode>
+                </div>
+                <div id="ships-pics">
+                    <div id="ships-group">
+                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic.png'}/>
+                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic_reverse.png'}/>
+                    </div>
+                    <div id="subs-group">
+                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_signed.png'}/>
+                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_reverse.png'}/>
+                    </div>
+                </div>
+
+                {/* SOUNDS */}
+                <audio muted id='hit-sound'>
                             <source src={app_gh_pages_URL + 'hit_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
@@ -269,22 +289,6 @@ class App extends React.Component {
                             <source src={app_gh_pages_URL + 'win_sound.wav'} type="audio/x-wav"/>
                             Your browser does not support the audio element.
                         </audio>
-                    </div>
-                    <div id="opp-grid">
-                        <OpponentGrid id={1} grid={this.state.opponent_grid} your_grid={this.state.grid} rerenderParentCallback={this.rerenderParentCallback} reset={this.ResetGame} />
-                    </div>
-                </React.StrictMode>
-                </div>
-                <div id="ships-pics">
-                    <div id="ships-group">
-                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic.png'}/>
-                        <img alt="ship" width="14%" src={app_gh_pages_URL + 'bs_ship_pic_reverse.png'}/>
-                    </div>
-                    <div id="subs-group">
-                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_signed.png'}/>
-                        <img alt="submarine" width="14%" src={app_gh_pages_URL + 'bs_sub_pic_reverse.png'}/>
-                    </div>
-                </div>
             </>
         )
       

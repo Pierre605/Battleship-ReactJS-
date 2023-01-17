@@ -44,8 +44,8 @@ input[type=radio] {
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(10, 34px);
-    grid-template-rows: repeat(10, 34px);
+    grid-template-columns: repeat(10, 45px);
+    grid-template-rows: repeat(10, 45px);
     justify-content: center;
     border: 2px solid black;
     border-radius: 6px;
@@ -69,8 +69,8 @@ input[type=radio] {
 
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(10, 29px);
-        grid-template-rows: repeat(10, 29px);
+        grid-template-columns: repeat(10, 32px);
+        grid-template-rows: repeat(10, 32px);
         justify-content: center;
     }
 }
