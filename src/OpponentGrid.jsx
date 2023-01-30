@@ -187,7 +187,8 @@ class OpponentGrid extends React.Component {
                     
                     else if (grid[r_idx[i]].valeur === null) {
                         // Shoot in middle of free space
-                        if (available.length >= 60) {
+                        if ((available.length >=85) || ((available.length < 72) && (!(available.length < 62)))) {
+                            console.log('Shoot in middle of free space')
                             // middle
                             if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
@@ -300,7 +301,8 @@ class OpponentGrid extends React.Component {
 
 
                         // fully null surrounded avoid
-                        else if (15 < available.length < 60) {
+                        else if (((available.length < 85) && (!(available.length < 72))) || ((available.length < 62) && (!(available.length <= 15)))) {
+                            console.log('fully null surrounded avoid')
                             // middle
                             if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
@@ -402,6 +404,7 @@ class OpponentGrid extends React.Component {
                             }
                     }
                     else {
+                        console.log('random blind')
                         grid[r_idx[i]].display = '🌀'
                         break
                     }
