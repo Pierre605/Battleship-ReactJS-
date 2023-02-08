@@ -225,6 +225,7 @@ class App extends React.Component {
             <>
             <h2 className='title'>BATAILLE NAVALE</h2>
             <img id='sound-icon' alt='sound icon' src={app_gh_pages_URL + this.state.sound_pic_src} onClick={() => this.MuteAll()}/>
+            <button type='button' id="stop_interval">stop</button>
                 <div id='grids'>
                 <React.StrictMode>
                     <div id="your-grid">
