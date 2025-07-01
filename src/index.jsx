@@ -35,7 +35,7 @@ class App extends React.Component {
         let x = window.matchMedia("(max-width: 555px)");
         this.SmartphoneCSSModal(x, document.getElementsByClassName('modal-content'));
         x.onchange = () => this.SmartphoneCSSModal(x, document.getElementsByClassName('modal-content'))
-        }
+    }
 
     
     AudioVolumeSet() {
@@ -54,7 +54,7 @@ class App extends React.Component {
             elem[1].style.marginTop = "0rem";
             elem[0].style.marginTop = "0rem";
         }
-      }
+    }
 
     ResetGame() {
         const size_grid = 10;
@@ -66,9 +66,10 @@ class App extends React.Component {
         // Reset start settings
         let cells = document.getElementsByClassName('cell')
         for (let i = 0; i < cells.length; i++) {
-            cells[i].style.border = '1px solid black'
+            cells[i].style.border = '1px solid black';
             cells[i].style.backgroundColor = 'rgb(1, 34, 123)';
-            }
+            cells[i].style.clipPath = 'none';
+        }
         
         let opp_grid = document.getElementById("opp-grid")
         opp_grid.style.display = 'none'
@@ -118,8 +119,8 @@ class App extends React.Component {
             for (let i=0; i < r.length; i++) {
                 if (r[i].id[1] <=  (10 - ship.size)) {
                     licht_r.push(r[i]);
-                    }
                 }
+            }
 
             for (let i=0; i < licht_r.length; i++) {
                 licht_tab_index.push(licht_r[i].id[0]*10 + licht_r[i].id[1])
@@ -129,8 +130,8 @@ class App extends React.Component {
                 for (let i=0; i < ship.size; i++) {
                     if (tab[licht_tab_index[j] + i].valeur === null) {
                         count +=1
-                        }
                     }
+                }
                 if (count === ship.size) {
                     tab_index = licht_tab_index[j]
                     break
@@ -145,16 +146,16 @@ class App extends React.Component {
             for (let i=0; i < ship.size; i++) {
                 tab[tab_index + i].valeur = ship.emo;
                 // tab[tab_index + i].display = ship.emo
-                }
             }
+        }
     
         else {
             for (let i=0; i < r.length; i++) {
                 if (r[i].id[0] <=  (10 - ship.size)) {
-                    licht_r.push(r[i]);
-                    }
+                        licht_r.push(r[i]);
                 }
-            console.log("R:", licht_r)
+            }
+            // console.log("R:", licht_r)
 
             for (let i=0; i < licht_r.length; i++) {
                 licht_tab_index.push(licht_r[i].id[0]*10 + licht_r[i].id[1])
@@ -185,7 +186,7 @@ class App extends React.Component {
         }
 
     return tab
-}
+    }
 
 
     MakeOpponentGrid = (size) => {
@@ -236,17 +237,17 @@ class App extends React.Component {
                     <div id='center'>
                         <img id="vs" src={app_gh_pages_URL + "vs.png"} alt='versus'/>
 
-                        <div id="Modal-victory" class="modal">
-                            <div class="modal-content">
-                                <span class="close"></span>
+                        <div id="Modal-victory" className="modal">
+                            <div className="modal-content">
+                                <span className="close"></span>
                                 <p>Victoire ! Vous avez coulé tous les navires ennemis 🥳</p>
                                 <img id="vic-pic" alt="victory" src={app_gh_pages_URL + 'victory_pic.png'} />
                                 <div className="score"></div>
                             </div>
                         </div>
-                        <div id="Modal-defeat" class="modal">
-                            <div class="modal-content">
-                                <span class="close"></span>
+                        <div id="Modal-defeat" className="modal">
+                            <div className="modal-content">
+                                <span className="close"></span>
                                 <p>Défaite. Tous vos navires ont été coulé 🥴</p>
                                 <img id="loose-pic" alt="defeat" src={app_gh_pages_URL + 'defeat_pic.png'} />
                                 <div className="score"></div>

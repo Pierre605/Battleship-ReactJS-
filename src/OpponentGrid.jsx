@@ -24,7 +24,7 @@ class OpponentGrid extends React.Component {
 
     Reset() {
         this.props.reset()
-        console.log("Reset")
+        // console.log("Reset")
     }
 
 
@@ -47,7 +47,7 @@ class OpponentGrid extends React.Component {
                 sunk_sound.play()
             }
             else {
-            hit_sound.play()
+                hit_sound.play()
             }
         }
     }
@@ -101,8 +101,8 @@ class OpponentGrid extends React.Component {
                 if ((grid[index].valeur === ship.emo) && (grid[index].display !== '☠️') && (grid[index].display !== '💥')) {
                     grid[index].display = '💥'
                     ship.hit += 1
-                    console.log(`${ship.hit} hit`)
-                    console.log(`${ship.name} ennemi touché`)
+                    // console.log(`${ship.hit} hit`)
+                    // console.log(`${ship.name} ennemi touché`)
                     text = `${ship.name} ennemi touché 🎯`
 
                     let sunk_text = this.Check_sunk_algo(grid, ship)
@@ -144,20 +144,20 @@ class OpponentGrid extends React.Component {
                 count_miss += 1
             }
         }
-        console.log("count strike:", count_strike)
-        console.log("count miss:", count_miss)
+        // console.log("count strike:", count_strike)
+        // console.log("count miss:", count_miss)
 
         
         if (count_strike === 0) {
             coord_hit = []
-            console.log("coord_hit:", coord_hit)
+            // console.log("coord_hit:", coord_hit)
     
             for (let i=0; i < grid.length; i++) {
                 if ((grid[i].display === null) || (your_emos.includes(grid[i].display))) { 
                     available.push(grid[i])
                 }
             }
-            console.log("available_list:", available)
+            // console.log("available_list:", available)
     
             while (n < available.length * 10) {
                 let random_place_i = Math.floor(Math.random() * available.length);
@@ -177,9 +177,9 @@ class OpponentGrid extends React.Component {
                     if (your_emos.includes(grid[r_idx[i]].valeur)) {
                         grid[r_idx[i]].display = '💥'
                         let indx_ship = ships.findIndex(isship)
-                        console.log(indx_ship)
+                        // console.log(indx_ship)
                         ships[indx_ship]['hit'] += 1
-                        console.log(ships[indx_ship]['name'], 'hit:', ships[indx_ship]['hit'])
+                        // console.log(ships[indx_ship]['name'], 'hit:', ships[indx_ship]['hit'])
                         text = `Votre ${ships[indx_ship]['name']} est touché 🤕`
                         coord_hit.push(r_idx[i])
                         break
@@ -188,113 +188,113 @@ class OpponentGrid extends React.Component {
                     else if (grid[r_idx[i]].valeur === null) {
                         // Shoot in middle of free space
                         if ((available.length >=85) || ((available.length < 72) && (!(available.length < 62)))) {
-                            console.log('Shoot in middle of free space')
+                            // console.log('Shoot in middle of free space')
                             // middle
                             if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // top left corner
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // top right corner
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // down left corner
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // down right corner
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // top edge
                             else if (grid[r_idx[i]].id[0] === 0) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // down edge
                             else if (grid[r_idx[i]].id[0] === 9) {
                                 if ((your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null) && (your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // left edge
                             else if (grid[r_idx[i]].id[1] === 0) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) && (your_emos.includes(grid[r_idx[i] + 1].display) || grid[r_idx[i] + 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                             // right edge
                             else if (grid[r_idx[i]].id[1] === 9) {
                                 if ((your_emos.includes(grid[r_idx[i] + 10].display) || grid[r_idx[i] + 10].display === null) && (your_emos.includes(grid[r_idx[i] - 10].display) || grid[r_idx[i] - 10].display === null) &&(your_emos.includes(grid[r_idx[i] - 1].display) || grid[r_idx[i] - 1].display === null)) {
-                                    console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
+                                    // console.log("SHOOT MIDDLE OF BLANK:", grid[r_idx[i]].id);
                                     grid[r_idx[i]].display = '🌀';
                                     text = '';
                                     break
                                 }
                                 else {
-                                    console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
+                                    // console.log('NOT SPREAD ENOUGH:', grid[r_idx[i]].id)
                                 }
                             }
                         }
@@ -302,11 +302,11 @@ class OpponentGrid extends React.Component {
 
                         // fully null surrounded avoid
                         else if (((available.length < 85) && (!(available.length < 72))) || ((available.length < 62) && (!(available.length <= 15)))) {
-                            console.log('fully null surrounded avoid')
+                            // console.log('fully null surrounded avoid')
                             // middle
                             if ((grid[r_idx[i]].id[0] > 0) && (grid[r_idx[i]].id[0] < 9) && (grid[r_idx[i]].id[1] > 0) && (grid[r_idx[i]].id[1] < 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -317,7 +317,7 @@ class OpponentGrid extends React.Component {
                             // top left corner
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -328,7 +328,7 @@ class OpponentGrid extends React.Component {
                             // top right corner
                             else if ((grid[r_idx[i]].id[0] === 0) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -339,7 +339,7 @@ class OpponentGrid extends React.Component {
                             // down left corner
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 0)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -350,7 +350,7 @@ class OpponentGrid extends React.Component {
                             // down right corner
                             else if ((grid[r_idx[i]].id[0] === 9) && (grid[r_idx[i]].id[1] === 9)) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -361,7 +361,7 @@ class OpponentGrid extends React.Component {
                             // top edge
                             else if (grid[r_idx[i]].id[0] === 0) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -372,7 +372,7 @@ class OpponentGrid extends React.Component {
                             // down edge
                             else if (grid[r_idx[i]].id[0] === 9) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] - 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -383,7 +383,7 @@ class OpponentGrid extends React.Component {
                             // left edge
                             else if (grid[r_idx[i]].id[1] === 0) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] + 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -394,7 +394,7 @@ class OpponentGrid extends React.Component {
                             // right edge
                             else if (grid[r_idx[i]].id[1] === 9) {
                                 if ((['🌀', '☠️'].includes(grid[r_idx[i] + 10].display)) && ['🌀', '☠️'].includes(grid[r_idx[i] - 10].display) && ['🌀', '☠️'].includes(grid[r_idx[i] - 1].display)) {
-                                    console.log("USELESS SHOOT:", grid[r_idx[i]].id);
+                                    // console.log("USELESS SHOOT:", grid[r_idx[i]].id);
                                 }
                                 else {
                                     grid[r_idx[i]].display = '🌀';
@@ -404,7 +404,7 @@ class OpponentGrid extends React.Component {
                             }
                     }
                     else {
-                        console.log('random blind')
+                        // console.log('random blind')
                         grid[r_idx[i]].display = '🌀'
                         break
                     }
@@ -423,8 +423,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i + 10].display !== '🌀') && (grid[i + 10].display !== '☠️')) {
                         if (grid[i +10].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i +10].display = '💥'
                             coord_hit.push(i + 10)
@@ -444,8 +444,8 @@ class OpponentGrid extends React.Component {
                     else if ((grid[i - 10].display !== '🌀') && (grid[i - 10].display !== '☠️')) {
                         if (grid[i - 10].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 10].display = '💥'
                             coord_hit.push(i - 10)
@@ -468,8 +468,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i + 10].display !== '🌀') && (grid[i + 10].display !== '☠️')) {
                         if (grid[i + 10].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 10].display = '💥'
                             coord_hit.push(i + 10)
@@ -492,8 +492,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i - 10].display !== '🌀') && (grid[i - 10].display !== '☠️')) {
                         if (grid[i - 10].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 10].display = '💥'
                             coord_hit.push(i - 10)
@@ -517,8 +517,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i + 1].display !== '🌀') && (grid[i + 1].display !== '☠️')) {
                         if (grid[i + 1].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
                             coord_hit.push(i + 1)
@@ -538,8 +538,8 @@ class OpponentGrid extends React.Component {
                     else if ((grid[i - 1].display !== '🌀') && (grid[i - 1].display !== '☠️')) {
                         if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
                             coord_hit.push(i - 1)
@@ -562,8 +562,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i + 1].display !== '🌀') && (grid[i + 1].display !== '☠️')) {
                         if ((grid[i + 1].valeur === ship.emo) && (grid[i + 1].display !== '☠️')) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
                             coord_hit.push(i + 1)
@@ -586,8 +586,8 @@ class OpponentGrid extends React.Component {
                     if ((grid[i - 1].display !== '🌀') && (grid[i - 1].display !== '☠️')) {
                         if (grid[i - 1].valeur === ship.emo) {
                             ship.hit += 1
-                            console.log(`${ship.hit} hit`)
-                            console.log(`Votre ${ship.name} est touché`)
+                            // console.log(`${ship.hit} hit`)
+                            // console.log(`Votre ${ship.name} est touché`)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
                             coord_hit.push(i - 1)
@@ -623,12 +623,12 @@ class OpponentGrid extends React.Component {
 
                     if ((grid[i - 10].display === '💥') && ((grid[i + 10].display !== '🌀') && (grid[i + 10].display !== '☠️'))) {
                         if (grid[i + 10].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 10].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i + 10)
-                            console.log("touché en bas")
+                            // console.log("touché en bas")
                             coord_hit.push(i+10)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -640,7 +640,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 10].display === null) {
                                 grid[i + 10].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -648,12 +648,12 @@ class OpponentGrid extends React.Component {
                     }
                     else if ((grid[i + 10].display === '💥') && ((grid[i - 10].display !== '🌀') && (grid[i - 10].display !== '☠️'))) {
                         if (grid[i - 10].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 10].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i - 10)
-                            console.log("touché en haut")
+                            // console.log("touché en haut")
                             coord_hit.push(i-10)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -665,7 +665,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 10].display === null) {
                                 grid[i - 10].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -678,12 +678,12 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i - 10].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 10].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i - 10)
-                            console.log("touché en bas")
+                            // console.log("touché en bas")
                             coord_hit.push(i - 10)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -695,7 +695,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 10].display === null) {
                                 grid[i - 10].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
@@ -706,12 +706,12 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i + 10].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 10].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i + 10)
-                            console.log("touché en haut")
+                            // console.log("touché en haut")
                             coord_hit.push(i + 10)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -723,7 +723,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 10].display === null) {
                                 grid[i + 10].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
@@ -738,12 +738,12 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
 
                         if ((grid[i + 10].valeur === ship.emo) && (grid[i + 10].display !== '☠️')) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 10].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i + 10)
-                            console.log("touché en bas")
+                            // console.log("touché en bas")
                             coord_hit.push(i + 10)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -755,7 +755,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 10].display === null) {
                                 grid[i + 10].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
@@ -767,15 +767,15 @@ class OpponentGrid extends React.Component {
                             coord_hit = coord_hit.reverse()
                             // console.log("coord_hit_list:", coord_hit)
                             i = coord_hit[coord_hit.length - 1]
-                            console.log("hit_ref:", i)
+                            // console.log("hit_ref:", i)
     
                             if ((grid[i - 10].valeur === ship.emo) && (grid[i - 10].display !== '☠️')) {
-                                console.log("here:", ship.emo)
+                                // console.log("here:", ship.emo)
                                 text = `Votre ${ship.name} est touché 🤕`
                                 grid[i - 10].display = '💥'
                                 ship.hit += 1
                                 coord_strike.push(i - 10)
-                                console.log("touché en bas")
+                                // console.log("touché en bas")
                                 coord_hit.push(i - 10)
                                 // console.log("coord_hit_list:", coord_hit)
                                 let sunk_text = this.Check_sunk_you(grid, ship, coord_hit, text)
@@ -787,7 +787,7 @@ class OpponentGrid extends React.Component {
                             else if (grid[i - 10].display === null) {
                                     grid[i - 10].display = '🌀';
                                     text = '';
-                                    console.log("dans l'eau")
+                                    // console.log("dans l'eau")
                                     // console.log("coord_hit_list:", coord_hit)
                                     break
                                 }
@@ -799,12 +799,12 @@ class OpponentGrid extends React.Component {
 
                     if ((grid[i + 1].display === '💥') && ((grid[i - 1].display !== '🌀') && (grid[i - 1].display !== '☠️'))) {
                         if (grid[i - 1].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i-1)
-                            console.log("touché à gauche")
+                            // console.log("touché à gauche")
                             coord_hit.push(i-1)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -816,7 +816,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 1].display === null) {
                                 grid[i - 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -825,12 +825,12 @@ class OpponentGrid extends React.Component {
 
                     else if ((grid[i - 1].display === '💥') && ((grid[i + 1].display !== '🌀') && (grid[i + 1].display !== '☠️'))) {
                         if (grid[i + 1].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i+1)
-                            console.log("touché à droite")
+                            // console.log("touché à droite")
                             coord_hit.push(i+1)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -842,7 +842,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 1].display === null) {
                                 grid[i + 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -856,12 +856,12 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
 
                         if (grid[i + 1].valeur === ship.emo) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i-1)
-                            console.log("touché à gauche")
+                            // console.log("touché à gauche")
                             coord_hit.push(i + 1)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -873,7 +873,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 1].display === null) {
                                 grid[i + 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
                         }
@@ -886,12 +886,12 @@ class OpponentGrid extends React.Component {
                         i = coord_hit[coord_hit.length - 1]
 
                         if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i - 1)
-                            console.log("touché à droite")
+                            // console.log("touché à droite")
                             coord_hit.push(i - 1)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -903,7 +903,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 1].display === null) {
                                 grid[i - 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
@@ -918,12 +918,12 @@ class OpponentGrid extends React.Component {
                         // console.log("hit ref:", i)
 
                         if ((grid[i + 1].valeur === ship.emo) && (grid[i + 1].display !== '☠️')) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i + 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i + 1)
-                            console.log("touché en bas")
+                            // console.log("touché en bas")
                             coord_hit.push(i + 1)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
@@ -935,7 +935,7 @@ class OpponentGrid extends React.Component {
                         else if (grid[i + 1].display === null) {
                                 grid[i + 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
                                 // console.log("coord_hit_list:", coord_hit)
                                 break
@@ -950,14 +950,14 @@ class OpponentGrid extends React.Component {
                         // console.log("hit ref:", i)
 
                         if ((grid[i - 1].valeur === ship.emo) && (grid[i - 1].display !== '☠️')) {
-                            console.log("here:", ship.emo)
+                            // console.log("here:", ship.emo)
                             text = `Votre ${ship.name} est touché 🤕`
                             grid[i - 1].display = '💥'
                             ship.hit += 1
                             coord_strike.push(i - 1)
-                            console.log("touché en bas")
+                            // console.log("touché en bas")
                             coord_hit.push(i - 1)
-                            console.log("coord_hit_list:", coord_hit)
+                            // console.log("coord_hit_list:", coord_hit)
                             let sunk = this.Check_sunk_you(grid, ship, coord_hit)
                             if (sunk) {
                                 text = sunk[0];
@@ -968,9 +968,9 @@ class OpponentGrid extends React.Component {
                         else if (grid[i - 1].display === null) {
                                 grid[i - 1].display = '🌀';
                                 text = '';
-                                console.log("dans l'eau")
+                                // console.log("dans l'eau")
                                 coord_hit = coord_hit.reverse()
-                                console.log("coord_hit_list:", coord_hit)
+                                // console.log("coord_hit_list:", coord_hit)
                                 break
                             }
                         }
@@ -992,7 +992,7 @@ class OpponentGrid extends React.Component {
 
     Check_sunk_algo = (grid, ship) => {
         if (ship.hit === ship.size) {
-            console.log(`${ship.name} ennemi coulé`)
+            // console.log(`${ship.name} ennemi coulé`)
             let sunk_text = `${ship.name} ennemi coulé 💯`
             for (let i=0; i < grid.length; i++) {
                 if ((grid[i].valeur === ship.emo) && (grid[i].display !== '☠️')) {
@@ -1006,7 +1006,7 @@ class OpponentGrid extends React.Component {
 
     Check_sunk_you = (grid, ship, coord_hit) => {
         if (ship.hit === ship.size) {
-            console.log(`Votre ${ship.name} est coulé`)
+            // console.log(`Votre ${ship.name} est coulé`)
             let sunk_text = `Votre ${ship.name} est coulé 😵`
             for (let i=0; i < grid.length; i++) {
                 if ((grid[i].valeur === ship.emo) && (grid[i].display !== '☠️')) {
@@ -1016,8 +1016,8 @@ class OpponentGrid extends React.Component {
 
             let new_coord_hit = coord_hit.slice(0, coord_hit.length - ship.size)
             coord_hit = new_coord_hit.reverse()
-            console.log("ship size:", ship.size)
-            console.log("sliced coord_hit:", coord_hit)
+            // console.log("ship size:", ship.size)
+            // console.log("sliced coord_hit:", coord_hit)
             return [sunk_text, coord_hit]
         }
     }

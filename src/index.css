@@ -27,9 +27,9 @@ h2 {
 
 #sound-icon {
   cursor: pointer;
-  width: 4%;
+  width: 3rem;
   float: right;
-  margin-top: -37px;
+  margin-top: -4.5rem;
   margin-right: 2%;
 }
 
@@ -170,7 +170,8 @@ p {
   }
 
   #sound-icon {
-    width: 5%;
+    margin-top: -2.75rem;
+    width: 2rem;
   }
 
   #vs {
@@ -213,7 +214,8 @@ p {
   }
 
   #sound-icon {
-    width: 6%;
+    margin-top: -2rem;
+    width: 1.75rem;
   }
 
   #grids {
